@@ -1,0 +1,3 @@
+[submodule "src/i3ipc-simple"]
+	path = src/i3ipc-simple
+	url = https://github.com/suyjuris/i3ipc-simple.git
