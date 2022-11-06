@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 
 #define I3IPC_IMPLEMENTATION
-#include "i3ipc-simple/i3ipc.h"
+#include "i3ipc.h"
 
 int main(int argc, char **argv) {
   bool single = false;
