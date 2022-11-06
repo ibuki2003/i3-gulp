@@ -1,6 +1,6 @@
 # Maintainer: fuwa <main@fuwa.dev>
 pkgname=i3-gulp
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 url="https://github.com/ibuki2003/i3-gulp"
 arch=('x86_64' 'i686')
