@@ -1,5 +1,10 @@
 /* SPDX-License-Identifier:  CC0-1.0 */
 
+/*
+ * modified by @ibuki2003
+ * original: https://github.com/suyjuris/i3ipc-simple/tree/ee9b58ecc973e997654e072d0385b798a05c06d5
+ */
+
 /* i3ipc-simple, a simple C/C++ library to interact with i3's IPC interface
  * Written by Philipp Czerner in 2020 <i3ipc-simple@nicze.de>
  * 
@@ -168,6 +173,11 @@ enum I3ipc_node_values {
     I3IPC_NODE_ORIENTATION_HORIZONTAL,
     I3IPC_NODE_ORIENTATION_VERTICAL,
 
+    I3IPC_NODE_FLOATING_AUTO_ON = 0,
+    I3IPC_NODE_FLOATING_AUTO_OFF,
+    I3IPC_NODE_FLOATING_USER_ON,
+    I3IPC_NODE_FLOATING_USER_OFF,
+
     I3IPC_NODE_WINDOW_TYPE_NULL = 0,
     I3IPC_NODE_WINDOW_TYPE_NORMAL,
     I3IPC_NODE_WINDOW_TYPE_DIALOG,
@@ -233,6 +243,9 @@ struct I3ipc_node {
     size_t* focus;
     int     focus_size;
     int     fullscreen_mode;
+    char*   floating;
+    int     floating_size;
+    int     floating_enum;
     I3ipc_node* nodes;
     int         nodes_size;
     I3ipc_node* floating_nodes;
@@ -2018,6 +2031,7 @@ static I3ipc_field i3ipc__global_fields[] = {
     I3IPC__DOFIELD(I3ipc_node, I3IPC_TYPE_BOOL, focused),
     I3IPC__DOARRAY(I3ipc_node, I3IPC_TYPE_SIZET, focus),
     I3IPC__DOFIELD(I3ipc_node, I3IPC_TYPE_INT, fullscreen_mode),
+    I3IPC__DOENUM (I3ipc_node, I3IPC_TYPE_CHAR, floating),
     I3IPC__DOARRAY(I3ipc_node, I3IPC_TYPE_NODE, nodes),
     I3IPC__DOARRAY(I3ipc_node, I3IPC_TYPE_NODE, floating_nodes),
 
@@ -2185,6 +2199,7 @@ static char const* i3ipc__global_enums[] = {
     "$I3ipc_node.orientation", "none", "horizontal", "vertical",
     "$I3ipc_node.window_type", NULL, "normal", "dialog", "utility", "toolbar", "splash",
         "menu", "dropdown_menu", "popup_menu", "tooltip", "notification", "dock", "unknown",
+    "$I3ipc_node.floating", "auto_on", "auto_off", "user_on", "user_off",
     "$I3ipc_bar_config.mode", "dock", "hide",
     "$I3ipc_bar_config.position", "bottom", "top",
     "$I3ipc_event_workspace.change", "focus", "init", "empty", "urgent", "reload", "rename",
