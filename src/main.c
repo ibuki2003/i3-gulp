@@ -35,7 +35,12 @@ int main(int argc, char **argv) {
       I3ipc_event_window* ev = (I3ipc_event_window*)ev_any;
       switch (ev->change_enum) {
         case I3IPC_WINDOW_CHANGE_NEW:
-          if (win_id == 0 && ev->container.window != win) {
+          if (
+              win_id == 0 && ev->container.window != win
+              && (
+                ev->container.floating_enum == I3IPC_NODE_FLOATING_AUTO_OFF ||
+                ev->container.floating_enum == I3IPC_NODE_FLOATING_USER_OFF)
+             ) {
             win_id = ev->container.window;
             XUnmapWindow(dis, win);
             XFlush(dis);
